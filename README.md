@@ -17,8 +17,7 @@ Email:    mrcl0wnlab\@\gmail.com
 python tool.py {domain}
 python tool.py fbi.gov
 ```
--
-### Th4nks Y0u
+### Th4nk Y0u
 ```
 @ofjaaah
 ```
