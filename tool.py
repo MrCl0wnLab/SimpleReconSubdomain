@@ -10,7 +10,7 @@ import sys
 # Twitter:  https://twitter.com/MrCl0wnLab
 # Email:    mrcl0wnlab\@\gmail.com
 #
-# Th4nks Y0u: @ofjaaah
+# Th4nk Y0u: @ofjaaah
 #
 # WARNING
 # +------------------------------------------------------------------------------+
