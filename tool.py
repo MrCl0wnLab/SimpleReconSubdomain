@@ -22,14 +22,18 @@ import sys
 # |  damage caused by this program                                               |
 # +------------------------------------------------------------------------------+
 
+import subprocess
+import concurrent.futures
+import sys
+
 try:
     # List command
     command_list = [
-        f'''curl -s "https://rapiddns.io/subdomain/TARGET?full=1#result" | awk -v RS='<[^>]+>' '/$1/' | sort -u >>TARGET-rapiddns.txt''',
-        f'''curl -s "https://riddler.io/search/exportcsv?q=pld:TARGET" | grep -Po "(([\w.-]*)\.([\w]*)\.([A-z]))\w+" | sort -u >>TARGET-riddler.txt''',
-        f'''curl -s "https://jldc.me/anubis/subdomains/TARGET" | grep -Po "((http|https):\/\/)?(([\w.-]*)\.([\w]*)\.([A-z]))\w+" | sort -u >>TARGET-jldc.txt ''',
+        f'''curl -s "https://rapiddns.io/subdomain/TARGET?full=1#result" | awk -v RS='<[^>]+>' '/TARGET/' |grep "\w.*TARGET$"| sort -u >>TARGET-rapiddns.txt''',
+        f'''curl -s "https://riddler.io/search/exportcsv?q=pld:TARGET""|cut -d, -f6|grep TARGET|sort -u >>TARGET-riddler.txt''',
+        f'''curl -s "https://jldc.me/anubis/subdomains/TARGET" | jq -r '.[]' 2>/dev/null|sort -u >>TARGET-jldc.txt''',
         f'''curl -s "https://crt.sh/?q=%25.TARGET&output=json" | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u >>TARGET-crt.txt''',
-        f'''curl -s "https://dns.bufferover.run/dns?q=.TARGET" | jq -r .FDNS_A[] | sed -s 's/,/\\n/g'  | sort -u  >>TARGET-bufferover.txt''',
+        f'''curl -s "https://dns.bufferover.run/dns?q=.TARGET" | jq -r '.FDNS_A[]' 2>/dev/null|cut -d, -f2|sort -u >>TARGET-bufferover.txt''',
         f'''cat TARGET-*.txt | sort -u >TARGET.txt;cat TARGET.txt -n'''
     ]
 
