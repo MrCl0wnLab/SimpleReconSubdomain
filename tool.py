@@ -34,7 +34,7 @@ try:
         f'''curl -s "https://jldc.me/anubis/subdomains/TARGET" | jq -r '.[]' 2>/dev/null|sort -u >>TARGET-jldc.txt''',
         f'''curl -s "https://crt.sh/?q=%25.TARGET&output=json" | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u >>TARGET-crt.txt''',
         f'''curl -s "https://dns.bufferover.run/dns?q=.TARGET" | jq -r '.FDNS_A[]' 2>/dev/null|cut -d, -f2|sort -u >>TARGET-bufferover.txt''',
-        f'''curl -s https://urlscan.io/domain/TARGET | grep "/domain" | grep TARGET | grep  -v "<span" | cut -d"/" -f3 | cut -d">" -f1 | sed 's/"//g' | sort -u >>TARGET-urlscan.txt''',
+        f'''curl -s "https://urlscan.io/domain/TARGET" | grep "/domain" | grep TARGET | grep  -v "<span" | cut -d"/" -f3 | cut -d">" -f1 | sed 's/"//g' | sort -u >>TARGET-urlscan.txt''',
         f'''cat TARGET-*.txt | sort -u >TARGET.txt;cat TARGET.txt -n'''
     ]
 
