@@ -1,9 +1,4 @@
-import subprocess
-import concurrent.futures
-import sys
-
-
-
+# -*- coding: utf-8 -*-
 # Autor:    MrCl0wn
 # Blog:     http://blog.mrcl0wn.com
 # GitHub:   https://github.com/MrCl0wnLab
@@ -57,4 +52,6 @@ try:
                 executor.shutdown(wait=True)
 
 except KeyboardInterrupt:
+    pass
+    
     pass
