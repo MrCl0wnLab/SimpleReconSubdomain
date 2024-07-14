@@ -33,6 +33,8 @@ curl -s "https://crt.sh/?q=%25.TARGET&output=json" | jq -r '.[].name_value' | se
 
 curl -s "https://dns.bufferover.run/dns?q=.TARGET" | jq -r .FDNS_A[] | sed -s 's/,/\\n/g'  | sort -u  >>TARGET-bufferover.txt
 
+curl -s "https://urlscan.io/domain/TARGET" | grep "/domain" | grep TARGET | grep  -v "<span" | cut -d"/" -f3 | cut -d">" -f1 | sed 's/"//g' | sort -u >>TARGET-urlscan.txt
+
 cat TARGET-*.txt | sort -u >TARGET.txt;cat TARGET.txt -n
 ```
 ## OUTPUT
@@ -42,6 +44,7 @@ TARGET-riddler.txt
 TARGET-jldc.txt
 TARGET-crt.txt
 TARGET-bufferover.txt
+TARGET-urlscan.txt
 ```
 ## OUTPUT SORT UNIQ
 ```
